@@ -1,0 +1,63 @@
+.home{
+    background-image: url(/image/background.jpg);
+    background-size: cover;
+    width: 100%;
+}
+
+.card-image-home {
+    width: 100%;
+    height: 360px;
+    display: flex;
+    align-items: center;
+}
+
+.card-image-list {
+    width: 100%;
+    height: 260px;
+    display:flex;
+    align-items:center;
+}
+
+.card-title {
+    font-size: 16px;
+    font-weight: 400;
+    color: #484848;
+    line-height: 1.35em;
+    height: 34px;
+}
+
+.card-description{
+    font-size:12px;
+    height:40px;
+}
+
+.card-price{
+    color:#414141;
+    font-weight:700;
+    font-size:17px;
+}
+
+#write-review {
+    margin-left: -25px;
+}
+
+#product-price{
+    font-size: 40px;
+    color: red;
+}
+
+.details-product-name{
+    font-size:30px;
+    font-weight:700;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+.footer-container {
+    width: auto;
+    max-width: 680px;
+    padding: 0 15px;
+  }

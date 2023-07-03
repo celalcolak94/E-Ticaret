@@ -1,0 +1,97 @@
+﻿@{
+    ViewData["Title"] = "List";
+}
+
+@model List<ProductModel>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-3">
+            <div class="list-group">
+
+                @if (ViewBag.CategoryId == null)
+                {
+                    <a class="list-group-item list-group-item-action active" asp-route="list">
+                        <i class="fa-solid fa-angles-right"></i>
+                        Tüm Ürünler
+                    </a>
+                }
+                else
+                {
+                    <a class="list-group-item list-group-item-action" asp-route="list">
+                        <i class="fa-solid fa-angles-right"></i>
+                        Tüm Ürünler
+                    </a>
+                }
+
+                @foreach (var category in (List<Category>)ViewBag.Categories)
+                {
+                    if (category.Id == ViewBag.CategoryId)
+                    {
+                        <a class="list-group-item list-group-item-action active" asp-route="list" asp-route-id="@category.Id">
+                            <i class="fa-solid fa-angles-right"></i>
+                            @category.Name
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="list-group-item list-group-item-action" asp-route="list" asp-route-id="@category.Id">
+                            <i class="fa-solid fa-angles-right"></i>
+                            @category.Name
+                        </a>
+                    }
+                }
+
+            </div>
+        </div>
+
+        <div class="col-9">
+
+            @if (Model.Count() == 0)
+            {
+                <div class="alert alert-danger" role="alert">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    Bu kategoride bir ürün bulunamadı.
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-success" role="alert">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <strong>@Model.Count() adet </strong>ürün bulundu.
+                </div>
+            }
+
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                @foreach (var urun in Model)
+                {
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-image-list">
+                                <img src="~/image/@urun.Image" class="card-img-top" alt="@urun.Name">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a asp-route="details" asp-route-id="@urun.Id">
+                                        @urun.Name
+                                    </a>
+                                </h5>
+                                <p class="card-text card-description pt-2">@urun.Description</p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted card-price">
+                                    <i class="fa-solid fa-turkish-lira-sign"></i>
+                                    @urun.Price₺
+                                </small>
+                                <a asp-route="details" asp-route-id="@urun.Id" class="btn btn-sm btn-default float-end">
+                                    <i class="fa-regular fa-circle-right"></i>
+                                    Ürünü İncele
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

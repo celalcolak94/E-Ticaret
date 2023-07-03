@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = "Details";
+}
+
+@model Product
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+            <img class="img-fluid w-100" src="/image/@Model.Image" alt="">
+        </div>
+        <div class="col-md-6">
+            <h1 class="details-product-name">@Model.Name</h1>
+            <div class="row mt-2">
+                <div class="col-md-12">
+
+                    @if (Model.Stock == 0)
+                    {
+                        <span class="badge bg-danger">Stokta yok</span>
+                        <span>#@Model.Stock</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-primary">Stokta var</span>
+                        <span>#@Model.Stock</span>
+                    }
+
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12">
+                    <div class="description">
+                        @Model.Description
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-4">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-alt"></i>
+                    <span class="badge bg-success">53</span>
+                </div>
+                <div class="col-md-4">
+                    <a id="write-review" href="#">Yorum yap</a>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <h2 id="product-price">@Model.Price₺</h2>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12">
+                    <form method="post" asp-controller="Cart" asp-action="AddToCart">
+                        <input type="hidden" value="@Model.Id" asp-for="Id" />
+                        <button class="btn btn-success fw-bold">
+                            <i class="fa-solid fa-cart-plus me-1"></i>
+                            Sepete Ekle
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="bd-example">
+                <nav>
+                    <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-description-tab" data-bs-toggle="tab" data-bs-target="#nav-description" type="button" role="tab" aria-controls="nav-description" aria-selected="true">Description</button>
+                        <button class="nav-link" id="nav-payment-tab" data-bs-toggle="tab" data-bs-target="#nav-payment" type="button" role="tab" aria-controls="nav-payment" aria-selected="false">Payment Methods</button>
+                        <button class="nav-link" id="nav-comment-tab" data-bs-toggle="tab" data-bs-target="#nav-comment" type="button" role="tab" aria-controls="nav-comment" aria-selected="false">Comment</button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade active show" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab">
+                        <p><strong>This is some placeholder content the Home tab's associated content.</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
+                    </div>
+                    <div class="tab-pane fade" id="nav-payment" role="tabpanel" aria-labelledby="nav-payment-tab">
+                        <p><strong>This is some placeholder content the Profile tab's associated content.</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
+                    </div>
+                    <div class="tab-pane fade" id="nav-comment" role="tabpanel" aria-labelledby="nav-comment-tab">
+                        <p><strong>This is some placeholder content the Contact tab's associated content.</strong> Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

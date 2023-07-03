@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Delete";
+    Layout = "_AdminLayout";
+}
+
+@model Category
+
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-body">
+            <h1>Kategori Silme İşlemi</h1>
+            <hr />
+
+            <h3 class="mb-3">Kategoriyi silmek istediğinize emin misiniz?</h3>
+            <h5 class="card-subtitle mb-2 text-muted">Kategori Adı: <b>@Model.Name</b></h5>
+            <br />
+            <form method="post" asp-controller="Category" asp-action="Delete">
+                <input type="hidden" asp-for="Id" value="@Model.Id" />
+                <button class="btn btn-danger" type="submit">
+                    Sil
+                </button>
+                <a class="btn btn-warning" asp-controller="Category" asp-action="Index">
+                    Vazgeç
+                </a>
+            </form>
+        </div>
+    </div>
+</div>
+
+

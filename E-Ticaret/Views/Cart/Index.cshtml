@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+
+@model Cart
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-12">
+
+            <h2>Alışveriş Sepeti</h2>
+            <hr />
+
+            @if (Model.CartLines.Count > 0)
+            {
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="width:7%;">Resim</th>
+                            <th style="width:6%;">Adet</th>
+                            <th>Ürün Adı</th>
+                            <th style="width:15%;">Fiyat</th>
+                            <th style="width:15%;">Ara Toplam</th>
+                            <th style ="width:8%;"></th>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.CartLines)
+                        {
+                            <tr>
+                                <td>
+                                    <img src="~/image/@item.Product.Image" width="50" />
+                                </td>
+                                <td class="d-flex justify-content-center align-item-center">
+                                    @item.Quantity
+                                </td>
+                                <td>
+                                    @item.Product.Name
+                                </td>
+                                <td>
+                                    @item.Product.Price₺
+                                </td>
+                                <td>
+                                    @(item.Product.Price * item.Quantity)₺
+                                </td>
+                                <td>
+                                    <a class="btn btn-sm btn-danger" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.Product.Id">
+                                        <i class="fa-solid fa-trash"></i>
+                                        Sil
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4"></td>
+                            <td colspan="2">
+                                <b>TOPLAM: </b>@Model.Total()₺
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            }else
+            {
+                <div class="alert alert-warning" role="alert">
+                    <i class="fa-solid fa-triangle-exclamation me-2"></i>
+                    Alışveriş Sepetinizde Ürün Bulunmamaktadır.
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model List<ProductModel>
+
+<div class="home p-5 mb-4 bg-light">
+    <div class="container py-5 text-white">
+        <h1 class="display-5 fw-bold">Custom jumbotron</h1>
+        <p class="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
+        <button class="btn btn-primary btn-lg" type="button">Example button</button>
+    </div>
+</div>
+
+<div class="container mb-5">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+
+        @foreach (var urun in Model)
+        {
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-image-home">
+                        <img src="~/image/@urun.Image" class="card-img-top" alt="@urun.Name">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a asp-route="details" asp-route-id="@urun.Id">
+                                @urun.Name
+                            </a>
+                        </h5>
+                        <p class="card-text card-description pt-2">@urun.Description</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted card-price">
+                            <i class="fa-solid fa-turkish-lira-sign"></i>
+                            @urun.Price
+                        </small>
+                        <a asp-route="details" asp-route-id="@urun.Id" class="btn btn-sm btn-default float-end">
+                            <i class="fa-regular fa-circle-right"></i>
+                            Ürünü İncele
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

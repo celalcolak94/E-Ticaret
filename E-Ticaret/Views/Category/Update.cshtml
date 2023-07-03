@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "Update";
+    Layout = "_AdminLayout";
+}
+
+@model Category
+
+<div class="container mt-3">
+    <h1>Kategori Güncelleme İşlemi</h1>
+    <hr />
+
+    <form method="post" asp-controller="Category" asp-action="Update">
+        <div class="mb-3">
+            <label for="categoryname" class="form-label">Kategori Adı</label>
+            <input asp-for="Name" type="text" class="form-control" id="categoryname" placeholder="Kategori adı giriniz..">
+        </div>
+        <div class="mb-3">
+            <label for="categorydesc" class="form-label">Açıklama</label>
+            <textarea asp-for="Description" class="form-control" id="categorydesc" rows="3" placeholder="Açıklama giriniz.."></textarea>
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-primary" type="submit">
+                Güncelle
+            </button>
+            <a class="btn btn-warning" asp-controller="Category" asp-action="Index">
+                Vazgeç
+            </a>
+        </div>
+    </form>
+
+</div>

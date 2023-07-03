@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "_AdminLayout";
+}
+
+@model List<Category>
+
+
+<div class="container mt-3">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Kategori Listesi</h1>
+        </div>
+        <div class="col-md-6 text-end">
+            <a asp-controller="Category" asp-action="Create" class="btn btn-primary">
+                Yeni Kategori
+            </a>
+        </div>
+        <hr />
+    </div>
+
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Kategori Adı
+                </th>
+                <th>
+                    Açıklama
+                </th>
+                <th style="width:11%;">
+                    İşlemler
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in Model)
+            {
+                <tr>
+                    <td>@category.Name</td>
+                    <td>@category.Description</td>
+                    <td>
+                        <a asp-controller="Category" asp-action="Update" asp-route-id="@category.Id" class="btn btn-sm btn-warning">
+                            Düzenle
+                        </a>
+                        <a asp-controller="Category" asp-action="Delete" asp-route-id="@category.Id" class="btn btn-sm btn-danger">
+                            Sil
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

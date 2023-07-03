@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewData["Title"] = "Update";
+    Layout = "_AdminLayout";
+}
+
+@model Product
+
+<div class="container mt-3">
+    <h1>Ürün Güncelleme</h1>
+    <hr />
+
+    <form method="post" asp-controller="Product" asp-action="Update">
+        <div class="mb-3">
+            <label for="productname" class="form-label">Ürün Adı</label>
+            <input asp-for="Name" type="text" class="form-control" id="productname" placeholder="Ürün adı giriniz..">
+        </div>
+        <div class="mb-3">
+            <label for="productdesc" class="form-label">Ürün Açıklama</label>
+            <textarea asp-for="Description" class="form-control" id="productdesc" rows="3" placeholder="Açıklama giriniz.."></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="productprice" class="form-label">Fiyat</label>
+            <input asp-for="Price" type="number" class="form-control" id="productprice" placeholder="Fiyat giriniz..">
+        </div>
+        <div class="mb-3">
+            <label for="productstock" class="form-label">Stok</label>
+            <input asp-for="Stock" type="number" class="form-control" id="productstock" placeholder="Stok giriniz..">
+        </div>
+        <div class="mb-3">
+            <label for="productimage" class="form-label">Fotoğraf</label>
+            <input asp-for="Image" type="text" class="form-control" id="productimage">
+        </div>
+        <div class="form-check mb-3">
+            <input asp-for="IsHome" class="form-check-input" type="checkbox">
+            <label class="form-check-label">
+                Ana Sayfa
+            </label>
+        </div>
+        <div class="form-check mb-3">
+            <input asp-for="IsApproved" class="form-check-input" type="checkbox">
+            <label class="form-check-label">
+                Onaylı
+            </label>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Kategori</label>
+            <select asp-for="CategoryId" class="form-select" aria-label="Default select example">
+                @foreach (var category in (List<Category>)ViewBag.Categories)
+                {
+                    <option value="@category.Id">@category.Name</option>
+                }
+            </select>
+        </div>
+        <div class="mb-3">
+            <button class="btn btn-primary" type="submit">
+                Kaydet
+            </button>
+            <a class="btn btn-warning" asp-controller="Category" asp-action="Index">
+                Vazgeç
+            </a>
+        </div>
+    </form>
+
+
+</div>
