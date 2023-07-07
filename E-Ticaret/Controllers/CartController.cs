@@ -30,9 +30,32 @@ namespace E_Ticaret.Controllers
 
             if (product != null)
             {
-                var cart = GetCart();
-                cart.AddProduct(product,1);
-                _httpContextAccessor?.HttpContext?.Session.SetCart("Cart", cart);
+                if (product.Stock > 0)
+                {
+                    var cart = GetCart();
+                    cart.AddProduct(product, 1);
+                    _httpContextAccessor?.HttpContext?.Session.SetCart("Cart", cart);
+                }
+
+            }
+
+            return RedirectToAction("Index");
+
+        }
+
+        public IActionResult ReduceToCart(int id)
+        {
+            var product = db.Products.Find(id);
+
+            if (product != null)
+            {
+                if (product.Stock > 0)
+                {
+                    var cart = GetCart();
+                    cart.ReduceProduct(product);
+                    _httpContextAccessor?.HttpContext?.Session.SetCart("Cart", cart);
+                }
+
             }
 
             return RedirectToAction("Index");
@@ -61,12 +84,80 @@ namespace E_Ticaret.Controllers
             return cart;
         }
 
-        public PartialViewResult Summary()
+        public IActionResult Checkout()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Checkout(ShippingDetails shipping)
         {
             var cart = GetCart();
 
+            if (cart.CartLines.Count == 0)
+            {
+                ModelState.AddModelError("UrunYokError", "Sepetinizde ürün bulunmamaktadır.");
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    SaveOrder(cart,shipping);
 
-            return PartialView("Summary",cart);
+                    cart.Clear();
+                    _httpContextAccessor?.HttpContext?.Session.SetCart("Cart", cart);
+                    return View("Completed");
+
+                }
+                else
+                {
+                    return View(shipping);
+                }
+            }
+
+
+            return View();
+        }
+
+        private void SaveOrder(Cart cart, ShippingDetails shipping)
+        {
+            var order = new Order();
+
+            order.OrderNumber = "A" + new Random().Next(10000, 99999).ToString();
+            order.TotalPrice = cart.Total();
+            order.OrderDate = DateTime.Now;
+            order.UserName = shipping.UserName;
+            order.AdresBasligi = shipping.AdresBasligi;
+            order.Adres = shipping.Adres;
+            order.Sehir = shipping.Sehir;
+            order.Semt = shipping.Semt;
+            order.Mahalle = shipping.Mahalle;
+            order.PostaKodu = shipping.PostaKodu;
+            order.OrderLines = new List<OrderLine>();
+
+            foreach (var product in cart.CartLines)
+            {
+                var orderline = new OrderLine();
+                orderline.Quantity = product.Quantity;
+                orderline.Price = product.Quantity * product.Product.Price;
+                orderline.ProductId = product.Product.Id;
+
+                order.OrderLines.Add(orderline);
+            }
+
+            //Stoktan düşme işlemi
+            foreach (var item in cart.CartLines)
+            {
+                var p = db.Products.FirstOrDefault(x => x.Id == item.Product.Id);
+                p.Stock -= item.Quantity;
+
+                db.Products.Update(p);
+
+            }
+
+            db.Orders.Add(order);
+            db.SaveChanges();
+
         }
     }
 }

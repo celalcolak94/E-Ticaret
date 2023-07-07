@@ -1,0 +1,67 @@
+﻿@{
+    ViewData["Title"] = "Checkout";
+}
+
+@model ShippingDetails
+
+<style>
+    .field-validation-error { color: #f00;}
+    .field-validation-valid { display: none;}
+    .input-validation-error { border: 1px solid #f00; background-color: #fee;}
+
+
+    .validation-summary-errors { color: #f00; }
+    .validation-summary-valid { display: none;}
+</style>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Sipariş Bilgileriniz</h2>
+            <p>Lütfen adres bilgilerinizi giriniz.</p>
+            <hr />
+
+            <form method="post" asp-controller="Cart" asp-action="Checkout">
+
+                @Html.ValidationSummary()
+
+                <div class="mb-3">
+                    <label for="fullname" class="form-label">UserName</label>
+                    <input asp-for="UserName" type="text" class="form-control" id="fullname">
+                </div>
+                <div class="mb-3">
+                    <label for="adresbasligi" class="form-label">Adres Başlığı</label>
+                    <input asp-for="AdresBasligi" type="text" class="form-control" id="adresbasligi">
+                </div>
+                <div class="mb-3">
+                    <label for="adres" class="form-label">Adres</label>
+                    <input asp-for="Adres" type="text" class="form-control" id="adres">
+                </div>
+                <div class="mb-3">
+                    <label for="sehir" class="form-label">Şehir</label>
+                    <input asp-for="Sehir" type="text" class="form-control" id="sehir">
+                </div>
+                <div class="mb-3">
+                    <label for="semt" class="form-label">Semt</label>
+                    <input asp-for="Semt" type="text" class="form-control" id="semt">
+                </div>
+                <div class="mb-3">
+                    <label for="mahalle" class="form-label">Mahalle</label>
+                    <input asp-for="Mahalle" type="text" class="form-control" id="mahalle">
+                </div>
+                <div class="mb-3">
+                    <label for="postakodu" class="form-label">Posta Kodu</label>
+                    <input asp-for="PostaKodu" type="text" class="form-control" id="postakodu">
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary px-5">
+                        Kaydet
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>

@@ -21,8 +21,24 @@ namespace E_Ticaret.Models
             }
             else
             {
-                line.Quantity += quantity;
+                //Stoktakinden daha fazla sepete eklenememesi için
+                if (line.Product.Stock > line.Quantity)
+                {
+                    line.Quantity += quantity;
+                }
+
             }
+        }
+
+        public void ReduceProduct(Product product)
+        {
+            var line = CartLines.FirstOrDefault(x => x.Product.Id == product.Id);
+
+            if (line != null && line.Quantity > 1)
+            {
+                line.Quantity -= 1;
+            }
+
         }
 
         public void DeleteProduct(Product product)

@@ -81,7 +81,7 @@
                             <div class="card-footer">
                                 <small class="text-muted card-price">
                                     <i class="fa-solid fa-turkish-lira-sign"></i>
-                                    @urun.Price₺
+                                    @Convert.ToInt32(urun.Price)
                                 </small>
                                 <a asp-route="details" asp-route-id="@urun.Id" class="btn btn-sm btn-default float-end">
                                     <i class="fa-regular fa-circle-right"></i>

@@ -22,7 +22,7 @@
                             <th>Ürün Adı</th>
                             <th style="width:15%;">Fiyat</th>
                             <th style="width:15%;">Ara Toplam</th>
-                            <th style ="width:8%;"></th>
+                            <th style="width:13%;"></th>
                     </thead>
                     <tbody>
                         @foreach (var item in Model.CartLines)
@@ -44,7 +44,13 @@
                                     @(item.Product.Price * item.Quantity)₺
                                 </td>
                                 <td>
-                                    <a class="btn btn-sm btn-danger" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.Product.Id">
+                                    <a class="badge bg-success p-2 text-white" asp-controller="Cart" asp-action="AddToCart" asp-route-id="@item.Product.Id">
+                                        <i class="fa-solid fa-plus"></i>
+                                    </a>
+                                    <a class="badge bg-warning text-dark p-2" asp-controller="Cart" asp-action="ReduceToCart" asp-route-id="@item.Product.Id">
+                                        <i class="fa-solid fa-minus"></i>
+                                    </a>
+                                    <a class="btn btn-sm btn-danger px-3" asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@item.Product.Id">
                                         <i class="fa-solid fa-trash"></i>
                                         Sil
                                     </a>
@@ -61,7 +67,20 @@
                         </tr>
                     </tfoot>
                 </table>
-            }else
+
+                <div class="d-flex justify-content-between px-3">
+                    <a asp-controller="Home" asp-action="List" class="btn btn-primary">
+                        <i class="fa-solid fa-angles-left"></i>
+                        Alışverişe Devam Et
+                    </a>
+                    <a asp-controller="Cart" asp-action="Checkout" class="btn btn-primary">
+                        <i class="fa-solid fa-check"></i>
+                        Alışverişi Tamamla
+                    </a>
+                </div>
+
+            }
+            else
             {
                 <div class="alert alert-warning" role="alert">
                     <i class="fa-solid fa-triangle-exclamation me-2"></i>
