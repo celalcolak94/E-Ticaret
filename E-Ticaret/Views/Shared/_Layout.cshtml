@@ -13,7 +13,7 @@
     <header class="p-3 bg-dark text-white">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="/" class="d-flex align-items-center mb-lg-0 text-white text-decoration-none me-5">
+                <a asp-controller="Home" asp-action="Index" class="d-flex align-items-center mb-lg-0 text-white text-decoration-none me-5">
                     <h5>E-Ticaret</h5>
                 </a>
 
@@ -28,12 +28,41 @@
                 </form>
 
                 <div class="text-end">
-                    <a asp-controller="Cart" asp-action="Index" class="btn btn-danger">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </a>
-                    <a class="btn btn-primary" asp-controller="Product" asp-action="Index">Admin</a>
-                    <button type="button" class="btn btn-outline-light me-2">Login</button>
-                    <button type="button" class="btn btn-warning">Sign-up</button>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-controller="Cart" asp-action="Index" class="btn btn-danger">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-controller="Product" asp-action="Index" class="btn btn-warning">Admin Paneli</a>
+                        }
+
+                        <div class="btn-group dropdown">
+                            <button class="btn btn-outline-light me-2 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span>@User.Identity.Name.ToUpper()</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Account" asp-action="Index">
+                                        Siparişlerim
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-controller="Account" asp-action="LogOut">
+                                        Çıkış
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <a asp-controller="Account" asp-action="Login" class="btn btn-outline-light me-2">Giriş</a>
+                        <a asp-controller="Account" asp-action="Register" class="btn btn-warning">Kayıt-Ol</a>
+                    }
                 </div>
             </div>
         </div>

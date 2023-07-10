@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+@model List<UserOrderModel>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Sipariş Bilgileriniz</h2>
+            <hr />
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Sipariş Numarası</th>
+                        <th>Sipariş Tarihi</th>
+                        <th>Toplam Fiyat</th>
+                        <th>Sipariş Durumu</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.OrderNumber</td>
+                            <td>@item.OrderDate.ToShortDateString()</td>
+                            <td>@Convert.ToInt32(item.TotalPrice) ₺</td>
+                            <td>@item.OrderState</td>
+                            <td>
+                                <a asp-controller="Account" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">
+                                    Detay
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

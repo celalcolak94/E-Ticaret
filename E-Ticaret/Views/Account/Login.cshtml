@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+@model LoginModel
+
+<style>
+    .login-container {
+        display: flex;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+    }
+
+    .form-signin {
+        width: 100%;
+        height: 430px;
+        max-width: 330px;
+        padding: 15px;
+        margin: auto;
+    }
+</style>
+<div class="text-center login-container">
+    <div class="form-signin">
+        <form method="post" asp-controller="Account" asp-action="Login">
+            <img class="mb-4" src="/image/bootstrap-logo.svg" alt="" width="72" height="57">
+            <h1 class="h3 mb-3 fw-normal">Lütfen Giriş Yapın</h1>
+            <span style="color:red;">@Html.ValidationMessage("LoginError")</span>
+            <div class="form-floating">
+                <input asp-for="UserName" type="text" class="form-control" id="floatingInput" placeholder="Kullanıcı adı giriniz..">
+                <label for="floatingInput">Kullanıcı Adı</label>
+                <span asp-validation-for="UserName"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Parola</label>
+                <span asp-validation-for="Password"></span>
+            </div>
+
+            <div class="my-3">
+                <label>
+                    <input asp-for="RememberMe" type="checkbox"> Beni Hatırla
+                </label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Oturum Aç</button>
+        </form>
+    </div>
+</div>

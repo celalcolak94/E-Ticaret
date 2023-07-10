@@ -15,6 +15,13 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+//Add login
+builder.Services.AddAuthentication("CLL94")
+    .AddCookie("CLL94", option =>
+    {
+        option.LoginPath = "/Account/Login";
+    });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -33,6 +40,10 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.UseSession();
+
+//login
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",

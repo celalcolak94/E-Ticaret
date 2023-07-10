@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "Register";
+}
+
+@model RegisterModel
+
+<style>
+    .login-container {
+        display: flex;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 25px;
+        background-color: #f5f5f5;
+    }
+
+    .form-signin {
+        width: 100%;
+        height: 500px;
+        max-width: 330px;
+        padding: 15px;
+        margin: auto;
+    }
+</style>
+
+<div id="msg" data-status=@(ViewBag.Message != null ? "Completed" : "NotCompleted")></div>
+
+<div class="text-center login-container">
+    <div class="form-signin">
+        <form method="post" asp-controller="Account" asp-action="Register">
+
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-success">@ViewBag.Message</div>
+            }
+
+            <h1 class="h3 mb-3 fw-normal">Kayıt Ol</h1>
+            <div class="form-floating">
+                <input asp-for="Name" type="text" class="form-control" id="floatingInput" placeholder="Adınızı giriniz..">
+                <label for="floatingInput">Ad</label>
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="SurName" type="text" class="form-control" id="floatingInput" placeholder="Soyadınızı giriniz..">
+                <label for="floatingInput">Soyad</label>
+                <span class="text-danger" asp-validation-for="SurName"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="UserName" type="text" class="form-control" id="floatingInput" placeholder="Kullanıcı adı giriniz..">
+                <label for="floatingInput">Kullanıcı Adı</label>
+                <span class="text-danger" asp-validation-for="UserName"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Email" type="email" class="form-control" id="floatingInput" placeholder="E-mail giriniz..">
+                <label for="floatingInput">Kullanıcı E-Posta</label>
+                <span class="text-danger" asp-validation-for="Email"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Password" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Parola</label>
+                <span class="text-danger" asp-validation-for="Password"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="RePassword" type="password" class="form-control" id="floatingPassword" placeholder="Password Tekrar">
+                <label for="floatingPassword">Parola Tekrar</label>
+                <span class="text-danger" asp-validation-for="RePassword"></span>
+            </div>
+
+            <button class="w-100 btn btn-lg btn-primary mt-2" type="submit">Kayıt Ol</button>
+        </form>
+    </div>
+</div>
+
+
+<script>
+
+    var msg = document.getElementById("msg");
+
+    if (msg.getAttribute("data-status") == "Completed") {
+
+        // 3sn sonra kodu yönlendir.
+        setTimeout(() => {
+
+            window.location.href = "/Account/Login";
+
+        }, 3000);
+
+    }
+
+</script>

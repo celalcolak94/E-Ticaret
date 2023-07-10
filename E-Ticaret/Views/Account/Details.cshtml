@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewData["Title"] = "Details";
+}
+
+@model OrderDetailsModel
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Sipariş Detay Bilgileri</h2>
+            <hr />
+
+            <dl class="row">
+                <dt class="col-sm-3">Sipariş Durumu</dt>
+                <dd class="col-sm-9">
+                    @if (Model.OrderState == EnumOrderState.Waiting)
+                    {
+                        <span class="badge bg-danger">Onay Bekliyor.</span>
+                    }else if(Model.OrderState == EnumOrderState.Complated)
+                    {
+                        <span class="badge bg-success">Sipariş Tamamlandı.</span>
+                    }
+                </dd>
+
+                <dt class="col-sm-3">Sipariş Numarası</dt>
+                <dd class="col-sm-9">@Model.OrderNumber</dd>
+
+                <dt class="col-sm-3">Toplam Fiyat</dt>
+                <dd class="col-sm-9">@Convert.ToInt32(Model.TotalPrice) ₺</dd>
+
+                <dt class="col-sm-3">Sipariş Tarihi</dt>
+                <dd class="col-sm-9">@Model.OrderDate</dd>
+
+
+                <dt class="col-sm-3">Adres</dt>
+                <dd class="col-sm-9">
+                    @Model.AdresBasligi
+                    <hr />
+                    @Model.Adres
+                    <br />
+                    @Model.Mahalle - @Model.Semt - @Model.Sehir
+                    <br />
+                    @Model.PostaKodu
+                </dd>
+
+                <dt class="col-sm-3">Ürünler</dt>
+                <dd class="col-sm-9">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Resim</th>
+                                <th>Ürün Adı</th>
+                                <th>Adet</th>
+                                <th>Fiyat</th>
+                                <th style="width:15%;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.OrderLines)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src="~/image/@item.Image" width="70"/>
+                                    </td>
+                                    <td>@item.ProductName</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@Convert.ToInt32(item.Price) ₺</td>
+                                    <td>
+                                        <a asp-controller="Home" asp-action="Details" asp-route-id="@item.ProductId" class="btn btn-sm btn-primary" target="_blank">
+                                            <i class="fa-solid fa-angles-right"></i>
+                                            Ürün Detay
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </dd>
+
+            </dl>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model List<AdminOrderModel>
+
+<div class="container mt-2">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Siparişler</h2>
+            <hr />
+
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Sipariş Numarası</th>
+                        <th>Sipariş Tarihi</th>
+                        <th>Adet</th>
+                        <th>Toplam Fiyat</th>
+                        <th>Sipariş Durumu</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.OrderNumber</td>
+                            <td>@item.OrderDate</td>
+                            <td>@item.Count</td>
+                            <td>@item.TotalPrice</td>
+                            <td>@item.OrderState</td>
+                            <td>
+                                <a asp-controller="Order" asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-primary">
+                                    Sipariş Detayı
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

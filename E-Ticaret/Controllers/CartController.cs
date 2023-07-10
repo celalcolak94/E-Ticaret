@@ -3,9 +3,11 @@ using E_Ticaret.Extensions;
 using E_Ticaret.Data;
 using E_Ticaret.Models;
 using E_Ticaret.Data.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace E_Ticaret.Controllers
 {
+    [Authorize(AuthenticationSchemes = "CLL94")]
     public class CartController : Controller
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -90,6 +92,7 @@ namespace E_Ticaret.Controllers
         }
 
         [HttpPost]
+        [Authorize(AuthenticationSchemes = "CLL94")]
         public IActionResult Checkout(ShippingDetails shipping)
         {
             var cart = GetCart();
@@ -119,6 +122,7 @@ namespace E_Ticaret.Controllers
             return View();
         }
 
+        [Authorize(AuthenticationSchemes = "CLL94")]
         private void SaveOrder(Cart cart, ShippingDetails shipping)
         {
             var order = new Order();
@@ -126,6 +130,7 @@ namespace E_Ticaret.Controllers
             order.OrderNumber = "A" + new Random().Next(10000, 99999).ToString();
             order.TotalPrice = cart.Total();
             order.OrderDate = DateTime.Now;
+            order.OrderState = EnumOrderState.Waiting;
             order.UserName = shipping.UserName;
             order.AdresBasligi = shipping.AdresBasligi;
             order.Adres = shipping.Adres;

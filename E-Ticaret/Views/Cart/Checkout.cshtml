@@ -27,7 +27,7 @@
 
                 <div class="mb-3">
                     <label for="fullname" class="form-label">UserName</label>
-                    <input asp-for="UserName" type="text" class="form-control" id="fullname">
+                    <input asp-for="UserName" type="text" class="form-control" id="fullname" value="@User.Identity.Name" readonly>
                 </div>
                 <div class="mb-3">
                     <label for="adresbasligi" class="form-label">Adres Başlığı</label>
