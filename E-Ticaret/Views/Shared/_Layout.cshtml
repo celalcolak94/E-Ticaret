@@ -31,9 +31,7 @@
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <a asp-controller="Cart" asp-action="Index" class="btn btn-danger">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                        </a>
+                        @await Component.InvokeAsync("CartSummary")
 
                         @if (User.IsInRole("Admin"))
                         {

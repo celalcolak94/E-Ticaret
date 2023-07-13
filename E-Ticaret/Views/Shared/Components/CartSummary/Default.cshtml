@@ -1,0 +1,6 @@
+﻿@model Cart
+
+<a asp-controller="Cart" asp-action="Index" class="btn btn-danger">
+    <i class="fa-solid fa-cart-shopping"></i>
+    (@Model.CartLines.Count())
+</a>
