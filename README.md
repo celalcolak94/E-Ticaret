@@ -1,7 +1,6 @@
 <h1>Mini E-Ticaret Sitesi</h1>
 
 <h2>Proje Hakkında</h2>
-<hr>
 <p>
   Proje Asp.Net Core MVC, Identity, EntityFramework ile oluşturulmuş, Frontend kısmında tamamiyle Bootstrap kullanılmış bir E-Ticaret sitesidir.
   Ana sayfa, Ürün Listesi, Alışveriş Sepeti, Sipariş Detayları ve Admin Paneli gibi bölümlerin olduğu,
@@ -9,7 +8,6 @@
   Veri Tabanının(MsSQL) Code First ve Migration yaklaşımı ile oluşturulduğu bir projedir.
 </p>
 <h2>Proje Görselleri</h2>
-<hr>
 <img src="https://github.com/celalcolak94/E-Ticaret/assets/132816581/93ff4c8e-01b8-4890-964b-368125054b76">
 <img src="https://github.com/celalcolak94/E-Ticaret/assets/132816581/d44ecba7-85ae-4f46-98bb-9905d74c26af">
 <img src="https://github.com/celalcolak94/E-Ticaret/assets/132816581/0fbd7188-9c4c-4483-b083-ab427d8bc4be">
